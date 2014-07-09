@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "make build",
-    "build-min": "make build-min"
+    "build-min": "make build-min",
+    "clean": "make clean"
   },
   "dependencies": {
     "webpack": "^1.3.1-beta7"
