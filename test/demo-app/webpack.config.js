@@ -13,5 +13,11 @@ module.exports = {
       { test: /\.es6.js$/, loader: 'traceur-loader' }
     ]
   },
-  devtool: '#source-map'
+
+  traceur: {
+    includeRuntime: true,
+    compilerOptions: {
+      sourceMap: true
+    }
+  }
 };
