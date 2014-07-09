@@ -16,33 +16,28 @@ var traceur = require('traceur');
 
 module.exports = function(source) {
   var log = this.debug ? support.log : support.noop;
-  // TODO: Provide a synchronous code path to maintain compatibility with
-  // `enhanced-require`
+
   var callback = this.async();
   this.cacheable && this.cacheable();
 
-  // If this is Traceur's runtime library, skip it--we don't need to run it
-  // through Traceur
+  log('Processing file: %s', this.resourcePath);
+
+  // If this is Traceur's runtime library, skip it
   if (this.resourcePath === runtimePath) {
     callback(null, source);
   }
 
-  log('Processing file: %s', this.resourcePath);
-
-  // Add a Webpack loader for the Traceur runtime library. (Our output files
-  // always rely on the runtime library being present.)
-  //
-  // TODO: Control this with an (optional) config flag
+  // Add a Webpack loader for the Traceur runtime library. (Transpiled code
+  // relies on Traceur's runtime library to function.)
   source = 'require("' + runtimePath + '");\n\n' + source;
 
-  // TODO: Expose configuration options here
-  // TODO: Provide a set of default configuration options and merge them
   var output = traceur.compile(source, {
     sourceMap: true
   });
 
+  // Report Traceur errors
   if (output.errors.length) {
-    console.error(chalk.red('ERROR:'), 'The Traceur module encountered the following errors:');
+    console.error(chalk.red('ERROR:'), 'Traceur encountered the following errors:');
     console.error('\t' + output.errors.join('\n\t'));
 
     callback(new Error(chalk.red('ERROR:'), 'Please fix these errors and re-run Webpack.'));
