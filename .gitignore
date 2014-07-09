@@ -1,0 +1,66 @@
+#
+# Project
+#
+
+node_modules
+
+#
+# Editor
+#
+
+*.orig
+*.swo
+*.swp
+*.vims
+*~
+.tern-port
+\#*\#
+flycheck-*.el
+.nrepl-port
+
+#
+# OS
+#
+
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+._*
+Icon?
+Thumbs.db
+ehthumbs.db
+
+#
+# Compiled source
+#
+
+*.class
+*.com
+*.dll
+*.exe
+*.o
+*.pyc
+*.so
+
+#
+# Packages
+#
+
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+#
+# Logs/Databases
+#
+
+*.log
+*.sql
+*.sqlite
+*.db
