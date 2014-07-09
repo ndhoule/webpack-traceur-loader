@@ -1,6 +1,6 @@
 /**
  * @license
- * traceur-loader v0.1.0
+ * traceur-loader v0.2.0
  * https://github.com/ndhoule/traceur-loader/issues/new
  *
  * Copyright 2014, Nathan Houle <nathan@nathanhoule.com>
