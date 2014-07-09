@@ -12,15 +12,13 @@ clean:
 
 # Build the file for development.
 build: | $(OUTPUT_DIR)
-	@$(NODE) $(WEBPACK_BIN) $(MAIN) $(OUTPUT_DIR)/$(OUTPUT).js
+	@$(NODE) $(WEBPACK_BIN) $(MAIN) $(OUTPUT_DIR)/$(OUTPUT).js -d
 
 .PHONY: build
 .DEFAULT_GOAL = build
 
 # Build the file for production, minifying and disabling source maps.
 build-min: | $(OUTPUT_DIR)
-	@$(NODE) $(WEBPACK_BIN) $(MAIN) $(OUTPUT_DIR)/$(OUTPUT).min.js \
-		--optimize-minimize \
-		--devtool NONE
+	@$(NODE) $(WEBPACK_BIN) $(MAIN) $(OUTPUT_DIR)/$(OUTPUT).min.js -p
 
 .PHONY: build-min
