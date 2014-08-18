@@ -1,8 +1,7 @@
 Traceur Loader for Webpack
 ==========================
 
-A [Webpack][] loader for transpiling ES6-compatible code to ES5-compatible code
-using Google's [Traceur][] compiler.
+A [Webpack][] loader for transpiling ES6-compatible code to ES5-compatible code using Google's [Traceur][] compiler.
 
 
 ## Usage
@@ -21,36 +20,30 @@ module.exports = {
     loaders: [
       // Transpile any JavaScript file:
       { test: /\.js$/, loader: 'traceur-loader' },
-      // Or only those with a specific suffix:
-      { test: /\.es6\.js$/, loader: 'traceur-loader' }
-    ]
-  },
 
-  // Place Traceur configuration settings on this object
-  traceur: {
-    includeRuntime: true,
-    compilerOptions: {
-      sourceMap: true
-    }
+      // Or only those with a specific suffix:
+      { test: /\.es6\.js$/, loader: 'traceur-loader' },
+
+      // Include the Traceur runtime:
+      { test: /\.es6\.js$/, loader: 'traceur-loader?runtime' },
+
+      // ...And any other Traceur option you like:
+      { test: /\.es6\.js$/, loader: 'traceur-loader?runtime&sourceMap&experimental' }
+    ]
   }
 };
 ```
 
-<!-- TODO: Document loader configuration once it's implemented -->
 
 ### Settings
 
-You can set settings for Traceur in `webpack.config.js`. Add a `traceur`
-property to your `module.exports` (see above) and put settings on it.
+You can set default settings for Traceur in `webpack.config.js`, or in a `require` statement as a querystring.
 
 #### List of Settings
 
-`includeRuntime`: Set to `false` to disable inclusion of the Traceur runtime
-library in your built file. Defaults to `true`.
+`runtime`: Set to `true` to disable inclusion of the Traceur runtime library in your built file. Defaults to `false`.
 
-Settings placed on the `traceur.compilerOptions` get passed directly to the
-Traceur compiler. See this list of [Traceur options][Traceur options] for a
-list of possible options.
+All other options are passed directly to to the Traceur compiler. See [this list][Traceur options] for a list of all Traceur options.
 
 
 ## Demo
