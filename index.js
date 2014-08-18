@@ -12,21 +12,17 @@
 var _ = require('lodash');
 var chalk = require('chalk');
 var support = require('./lib/support');
+var parseQuery = require('./lib/parseQuery');
+var parseOptions = require('./lib/parseOptions');
 var traceur = require('traceur');
 var runtimePath = require.resolve(require('traceur').RUNTIME_PATH);
 
 module.exports = function(source) {
   var log = this.debug ? support.log : support.noop;
-
   var callback = this.async();
   this.cacheable && this.cacheable();
 
-  // See `traceur-loader`'s README.md for a full list of options
-  var defaultOptions = {
-    includeRuntime: true,
-    compilerOptions: {}
-  };
-  var options = _.merge({}, defaultOptions, this.options.traceur);
+  var options = parseOptions(parseQuery(this.query));
 
   log('Processing file: %s', this.resourcePath);
   log('Current options are:', options);
@@ -39,12 +35,12 @@ module.exports = function(source) {
 
   // Add a Webpack loader for the Traceur runtime library. (Transpiled code
   // relies on Traceur's runtime library to function.)
-  if (options.includeRuntime) {
+  if (options.runtime) {
     source = 'require("' + runtimePath + '");\n\n' + source;
   }
 
   // Clone options, excluding non-Traceur options, and compile source
-  var output = traceur.compile(source, _.omit(options, 'includeRuntime'));
+  var output = traceur.compile(source, options.traceurOptions);
 
   // Report Traceur errors
   if (output.errors.length) {
