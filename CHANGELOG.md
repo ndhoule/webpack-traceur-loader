@@ -1,3 +1,8 @@
+## 0.3.0
+
+- Move options to `loader` querystring
+- Don't include traceur-runtime in build by default
+
 ## 0.2.0
 
 - Make Traceur compiler configurable via configuration knobs in
