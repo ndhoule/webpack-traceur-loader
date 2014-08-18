@@ -34,7 +34,7 @@ module.exports = function(source) {
   // If this is Traceur's runtime library, skip it
   if (this.resourcePath === runtimePath) {
     log('Skipping compilation of runtime file: %s', this.resourcePath);
-    callback(null, source);
+    return callback(null, source);
   }
 
   // Add a Webpack loader for the Traceur runtime library. (Transpiled code
@@ -51,7 +51,7 @@ module.exports = function(source) {
     console.error(chalk.red('ERROR:'), 'Traceur encountered the following errors:');
     console.error('\t' + output.errors.join('\n\t'));
 
-    callback(new Error(chalk.red('ERROR:'), 'Please fix these errors and re-run Webpack.'));
+    return callback(new Error(chalk.red('ERROR:'), 'Please fix these errors and re-run Webpack.'));
   }
 
   callback(null, output.js, output.sourceMap);
