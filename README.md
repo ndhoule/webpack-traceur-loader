@@ -6,7 +6,17 @@ A [Webpack][] loader for transpiling ES6-compatible code to ES5-compatible code 
 
 ## Usage
 
-<!-- TODO: Show inline/`require()` usage -->
+### Inline
+
+Requiring files inline:
+
+```javascript
+// Simple inline usage
+require('traceur!./src/index');
+
+// More advanced version; include the Traceur runtime
+require('traceur!./src/index?runtime');
+```
 
 [Documentation: Using Loaders][]
 
@@ -19,16 +29,16 @@ module.exports = {
   module: {
     loaders: [
       // Transpile any JavaScript file:
-      { test: /\.js$/, loader: 'traceur-loader' },
+      { test: /\.js$/, loader: 'traceur' },
 
       // Or only those with a specific suffix:
-      { test: /\.es6\.js$/, loader: 'traceur-loader' },
+      { test: /\.es6\.js$/, loader: 'traceur' },
 
       // Include the Traceur runtime:
-      { test: /\.es6\.js$/, loader: 'traceur-loader?runtime' },
+      { test: /\.es6\.js$/, loader: 'traceur?runtime' },
 
       // ...And any other Traceur option you like:
-      { test: /\.es6\.js$/, loader: 'traceur-loader?runtime&sourceMap&experimental' }
+      { test: /\.es6\.js$/, loader: 'traceur?runtime&sourceMap&experimental' }
     ]
   }
 };
