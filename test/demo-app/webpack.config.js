@@ -8,9 +8,10 @@ module.exports = {
   },
 
   cache: true,
+
   module: {
     loaders: [
-      { test: /\.es6.js$/, loader: 'traceur-loader?runtime&sourceMap' }
+      { test: /\.es6.js$/, loader: 'traceur?runtime&sourceMap' }
     ]
   }
 };
