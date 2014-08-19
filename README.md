@@ -4,6 +4,13 @@ Traceur Loader for Webpack
 A [Webpack][] loader for transpiling ES6-compatible code to ES5-compatible code using Google's [Traceur][] compiler.
 
 
+## Installation
+
+```sh
+npm install webpack-traceur-loader
+```
+
+
 ## Usage
 
 ### Inline
