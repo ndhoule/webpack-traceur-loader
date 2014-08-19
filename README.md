@@ -53,7 +53,7 @@ You can set default settings for Traceur in `webpack.config.js`, or in a `requir
 
 `runtime`: Set to `true` to disable inclusion of the Traceur runtime library in your built file. Defaults to `false`.
 
-All other options are passed directly to to the Traceur compiler. See [this list][Traceur options] for a list of all Traceur options.
+All other options are passed directly to to the Traceur compiler. See [this list][Traceur options] for a list of all Traceur options, and see [this guide][ES6 options] for example usages of ES6 features supported by Traceur.
 
 
 ## Demo
@@ -72,3 +72,4 @@ MIT ([License](LICENSE.md))
 [Traceur]: https://github.com/google/traceur-compiler "Traceur"
 [Webpack]: https://webpack.github.io/docs/ "Webpack"
 [Traceur options]: https://github.com/google/traceur-compiler/blob/aebf32380cfc70f31e940fc3c9ec26279e10b996/src/options.js#L235
+[ES6 options]: https://github.com/google/traceur-compiler/wiki/LanguageFeatures
