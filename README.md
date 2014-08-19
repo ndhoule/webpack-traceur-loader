@@ -19,10 +19,10 @@ Requiring files inline:
 
 ```javascript
 // Simple inline usage
-require('traceur!./src/index');
+require('webpack-traceur!./src/index');
 
 // More advanced version; include the Traceur runtime
-require('traceur!./src/index?runtime');
+require('webpack-traceur!./src/index?runtime');
 ```
 
 [Documentation: Using Loaders][]
@@ -36,16 +36,16 @@ module.exports = {
   module: {
     loaders: [
       // Transpile any JavaScript file:
-      { test: /\.js$/, loader: 'traceur' },
+      { test: /\.js$/, loader: 'webpack-traceur' },
 
       // Or only those with a specific suffix:
-      { test: /\.es6\.js$/, loader: 'traceur' },
+      { test: /\.es6\.js$/, loader: 'webpack-traceur' },
 
       // Include the Traceur runtime:
-      { test: /\.es6\.js$/, loader: 'traceur?runtime' },
+      { test: /\.es6\.js$/, loader: 'webpack-traceur?runtime' },
 
       // ...And any other Traceur option you like:
-      { test: /\.es6\.js$/, loader: 'traceur?runtime&sourceMaps&experimental' }
+      { test: /\.es6\.js$/, loader: 'webpack-traceur?runtime&sourceMaps&experimental' }
     ]
   }
 };

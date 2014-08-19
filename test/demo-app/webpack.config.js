@@ -11,7 +11,7 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.es6.js$/, loader: 'traceur?runtime&sourceMaps' }
+      { test: /\.es6.js$/, loader: 'webpack-traceur?runtime&sourceMaps' }
     ]
   }
 };
