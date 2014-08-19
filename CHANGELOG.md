@@ -1,3 +1,7 @@
+## 0.3.1
+
+- Add installation instructions
+
 ## 0.3.0
 
 - Bump Traceur to 0.0.58
