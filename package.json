@@ -18,8 +18,10 @@
     "es6",
     "harmony",
     "loader",
+    "loader",
     "traceur",
-    "webpack"
+    "webpack",
+    "webpack-loader"
   ],
   "dependencies": {
     "chalk": "^0.5.0",
