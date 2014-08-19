@@ -1,4 +1,4 @@
-module.exports = class Greeter {
+export class Greeter {
   constructor(message) {
     this.message = message;
   }

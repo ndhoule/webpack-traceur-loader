@@ -1,6 +1,8 @@
-var Greeter = require('./greeter.es6');
+import { Greeter } from './greeter.es6';
+import { double } from './double.es6';
+
 var greeter = new Greeter('Hello, world!');
 greeter.greet();
 
-var doubler = require('./doubler.es6');
-console.log(doubler(2));
+var four = double(2);
+console.log(four);
