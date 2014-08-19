@@ -38,7 +38,7 @@ module.exports = {
       { test: /\.es6\.js$/, loader: 'traceur?runtime' },
 
       // ...And any other Traceur option you like:
-      { test: /\.es6\.js$/, loader: 'traceur?runtime&sourceMap&experimental' }
+      { test: /\.es6\.js$/, loader: 'traceur?runtime&sourceMaps&experimental' }
     ]
   }
 };

@@ -9,40 +9,42 @@
 
 'use strict';
 
-var _ = require('lodash');
 var chalk = require('chalk');
-var support = require('./lib/support');
-var parseQuery = require('./lib/parseQuery');
 var parseOptions = require('./lib/parseOptions');
+var parseQuery = require('./lib/parseQuery');
+var support = require('./lib/support');
 var traceur = require('traceur');
 var runtimePath = require.resolve(require('traceur').RUNTIME_PATH);
+var utils = require('loader-utils');
 
 module.exports = function(source) {
+  var output;
+  var toCompile = source;
+  var sourceMap = null;
+  var options = parseOptions(parseQuery(this.query));
   var log = this.debug ? support.log : support.noop;
   var callback = this.async();
-  this.cacheable && this.cacheable();
 
-  var options = parseOptions(parseQuery(this.query));
+  this.cacheable && this.cacheable();
 
   log('Processing file: %s', this.resourcePath);
   log('Current options are:', options);
 
-  // If this is Traceur's runtime library, skip it
+  // Skip Traceur's runtime library
   if (this.resourcePath === runtimePath) {
     log('Skipping compilation of runtime file: %s', this.resourcePath);
     return callback(null, source);
   }
 
-  // Add a Webpack loader for the Traceur runtime library. (Transpiled code
-  // relies on Traceur's runtime library to function.)
+  // If enabled, add a Webpack loader for the Traceur runtime library.
+  // (Many features require the Traceur runtime library to work.)
   if (options.runtime) {
-    source = 'require("' + runtimePath + '");\n\n' + source;
+    toCompile = 'require("' + runtimePath + '");\n\n' + source;
   }
 
-  // Clone options, excluding non-Traceur options, and compile source
-  var output = traceur.compile(source, options.traceurOptions);
+  output = traceur.compile(toCompile, options.traceurOptions);
 
-  // Report Traceur errors
+  // If Traceur encountered any errors, report them and bail out
   if (output.errors.length) {
     console.error(chalk.red('ERROR:'), 'Traceur encountered the following errors:');
     console.error('\t' + output.errors.join('\n\t'));
@@ -50,5 +52,16 @@ module.exports = function(source) {
     return callback(new Error(chalk.red('ERROR:'), 'Please fix these errors and re-run Webpack.'));
   }
 
-  callback(null, output.js, output.sourceMap);
+  if (output.generatedSourceMap) {
+    sourceMap = JSON.parse(output.generatedSourceMap);
+
+    // For some reason, Traceur always outputs source maps with the filename
+    // '<unknown file>'. Set the source map filename to fix this.
+    sourceMap.file = utils.getCurrentRequest(this);
+    sourceMap.sources[0] = sourceMap.file;
+
+    sourceMap = JSON.stringify(sourceMap);
+  }
+
+  callback(null, output.js, sourceMap);
 };
