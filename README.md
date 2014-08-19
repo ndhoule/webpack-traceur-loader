@@ -58,7 +58,7 @@ All other options are passed directly to to the Traceur compiler. See [this list
 
 ## Demo
 
-See the `test/demo-app` directory in this project for a usage example.
+See the [`test/demo-app`](test/demo-app) directory for demo of the loader.
 
 
 ## License
