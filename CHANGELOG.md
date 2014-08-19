@@ -1,7 +1,9 @@
 ## 0.3.0
 
-- Move options to `loader` querystring
+- Bump Traceur to 0.0.58
+- Move options to `loader` querystring to follow Webpack conventions
 - Don't include traceur-runtime in build by default
+- Fix sourcemaps (or at least make them better than before, they're still a little janky)
 
 ## 0.2.0
 
